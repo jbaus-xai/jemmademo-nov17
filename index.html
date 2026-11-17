@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meridian — Random Quotes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true">
+      <div class="orb orb-a"></div>
+      <div class="orb orb-b"></div>
+      <div class="grain"></div>
+    </div>
+
+    <main class="stage">
+      <header class="brand">
+        <p class="brand-mark">Meridian</p>
+        <p class="brand-line">A quiet place for words that travel well.</p>
+      </header>
+
+      <section class="quote-panel" aria-live="polite">
+        <blockquote class="quote" id="quote">
+          <p class="quote-text" id="quote-text"></p>
+          <footer class="quote-meta">
+            <cite class="quote-author" id="quote-author"></cite>
+          </footer>
+        </blockquote>
+        <p class="empty-state" id="empty-state" hidden>
+          No favorites yet — tap the heart on a quote you like.
+        </p>
+      </section>
+
+      <div class="mode-row">
+        <button
+          type="button"
+          class="mode-toggle"
+          id="favorites-mode"
+          aria-pressed="false"
+        >
+          Favorites (<span id="favorites-count">0</span>)
+        </button>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="new-quote">
+          New quote
+        </button>
+        <button
+          type="button"
+          class="btn btn-favorite"
+          id="favorite-quote"
+          aria-pressed="false"
+          aria-label="Favorite this quote"
+        >
+          ♥ Favorite
+        </button>
+        <button type="button" class="btn btn-ghost" id="copy-quote">
+          Copy
+        </button>
+        <button type="button" class="btn btn-ghost" id="share-quote">
+          Share
+        </button>
+      </div>
+
+      <p class="toast" id="toast" role="status" hidden>Copied to clipboard</p>
+    </main>
+
+    <div class="share-backdrop" id="share-backdrop" hidden>
+      <div
+        class="share-menu"
+        id="share-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="share-menu-title"
+      >
+        <p class="share-menu-title" id="share-menu-title">Share this quote</p>
+        <div class="share-menu-actions">
+          <a class="btn btn-ghost share-option" id="share-email" href="#">
+            Email
+          </a>
+          <a
+            class="btn btn-ghost share-option"
+            id="share-x"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Post on X
+          </a>
+          <button type="button" class="btn btn-primary share-option" id="share-copy">
+            Copy quote
+          </button>
+        </div>
+        <button type="button" class="share-close" id="share-close">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <script src="quotes.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

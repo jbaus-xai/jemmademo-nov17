@@ -1,0 +1,386 @@
+:root {
+  --white: #ffffff;
+  --blue: #2563eb;
+  --blue-deep: #1d4ed8;
+  --blue-soft: #dbeafe;
+  --gray-900: #1f2937;
+  --gray-600: #4b5563;
+  --gray-400: #9ca3af;
+  --gray-200: #e5e7eb;
+  --glow: rgba(37, 99, 235, 0.22);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  color: var(--gray-900);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(100% 80% at 10% 0%, #eff6ff 0%, transparent 50%),
+    radial-gradient(90% 70% at 100% 20%, #f3f4f6 0%, transparent 45%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.45;
+  animation: drift 16s var(--ease) infinite alternate;
+}
+
+.orb-a {
+  width: min(48vw, 420px);
+  height: min(48vw, 420px);
+  top: -10%;
+  left: -8%;
+  background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+}
+
+.orb-b {
+  width: min(42vw, 360px);
+  height: min(42vw, 360px);
+  right: -6%;
+  bottom: 10%;
+  background: radial-gradient(circle, #e5e7eb 0%, transparent 72%);
+  animation-duration: 22s;
+  animation-delay: -4s;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto auto;
+  align-items: center;
+  gap: clamp(1.5rem, 4vh, 2.75rem);
+  width: min(920px, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding: clamp(1.75rem, 5vh, 3.5rem) 0;
+}
+
+.brand {
+  text-align: center;
+  animation: rise 0.9s var(--ease) both;
+}
+
+.brand-mark {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--gray-900);
+}
+
+.brand-line {
+  margin: 0.85rem 0 0;
+  color: var(--gray-600);
+  font-size: clamp(0.95rem, 2.4vw, 1.05rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.quote-panel {
+  display: grid;
+  place-items: center;
+  min-height: min(42vh, 320px);
+}
+
+.quote {
+  margin: 0;
+  max-width: 38rem;
+  text-align: center;
+}
+
+.quote[hidden],
+.empty-state[hidden] {
+  display: none;
+}
+
+.empty-state {
+  margin: 0;
+  max-width: 22rem;
+  text-align: center;
+  color: var(--gray-600);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.mode-row {
+  display: flex;
+  justify-content: center;
+  animation: rise 1s var(--ease) 0.08s both;
+}
+
+.mode-toggle {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--gray-600);
+  background: transparent;
+  padding: 0.45rem 0.85rem;
+  box-shadow: inset 0 0 0 1px var(--gray-200);
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.mode-toggle:hover {
+  color: var(--blue);
+  background: var(--blue-soft);
+  box-shadow: inset 0 0 0 1px #bfdbfe;
+}
+
+.mode-toggle.is-active {
+  color: var(--blue);
+  background: var(--blue-soft);
+  box-shadow: inset 0 0 0 1px #93c5fd;
+}
+
+.quote-text {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.45rem, 4vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--gray-900);
+}
+
+.quote-text::before {
+  content: "“";
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75em;
+  line-height: 1;
+  color: var(--blue);
+  opacity: 0.9;
+}
+
+.quote-meta {
+  margin-top: 1.5rem;
+}
+
+.quote-author {
+  font-style: normal;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+}
+
+.quote.is-leaving .quote-text,
+.quote.is-leaving .quote-author {
+  animation: fade-out 0.28s ease forwards;
+}
+
+.quote.is-entering .quote-text,
+.quote.is-entering .quote-author {
+  animation: fade-in 0.55s var(--ease) both;
+}
+
+.quote.is-entering .quote-author {
+  animation-delay: 0.08s;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  animation: rise 1s var(--ease) 0.12s both;
+}
+
+.btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 1.35rem;
+  transition:
+    transform 0.25s var(--ease),
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-primary {
+  color: var(--white);
+  background: var(--blue);
+  box-shadow: 0 10px 24px var(--glow);
+}
+
+.btn-primary:hover {
+  background: var(--blue-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px var(--glow);
+}
+
+.btn-ghost {
+  color: var(--gray-600);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--gray-200);
+}
+
+.btn-ghost:hover {
+  color: var(--blue);
+  background: var(--blue-soft);
+  box-shadow: inset 0 0 0 1px #bfdbfe;
+}
+
+.btn-favorite {
+  color: var(--gray-600);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--gray-200);
+}
+
+.btn-favorite:hover {
+  color: var(--blue);
+  background: var(--blue-soft);
+  box-shadow: inset 0 0 0 1px #bfdbfe;
+}
+
+.btn-favorite.is-active {
+  color: var(--white);
+  background: var(--blue);
+  box-shadow: 0 8px 20px var(--glow);
+}
+
+.btn-favorite.is-active:hover {
+  background: var(--blue-deep);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: inset 0 0 0 1px var(--gray-200);
+}
+
+.btn-primary:disabled,
+.btn-primary:disabled:hover {
+  background: var(--gray-400);
+  box-shadow: none;
+  transform: none;
+}
+
+.toast {
+  margin: 0;
+  text-align: center;
+  color: var(--gray-400);
+  font-size: 0.85rem;
+  min-height: 1.25rem;
+  animation: rise 0.35s var(--ease) both;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 4%, 0) scale(1.08);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb,
+  .brand,
+  .actions,
+  .toast,
+  .quote.is-leaving .quote-text,
+  .quote.is-leaving .quote-author,
+  .quote.is-entering .quote-text,
+  .quote.is-entering .quote-author {
+    animation: none !important;
+  }
+
+  .btn,
+  .btn:hover,
+  .btn:active {
+    transition: none;
+    transform: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .actions {
+    width: 100%;
+  }
+
+  .btn {
+    flex: 1 1 auto;
+  }
+}
